@@ -15,12 +15,7 @@ function GoogleLoginButton() {
    }
 
    return (
-      <Button
-      variant={"ghost"}
-         type="button"
-         onClick={OnClick}
-         className="flex cursor-pointer w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-sm transition "
-      >
+      <Button variant={"outline"} type="button" onClick={OnClick}>
          <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 48 48"

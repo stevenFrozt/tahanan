@@ -15,6 +15,7 @@ export default function PopupCallback() {
             window.location.origin,
          );
          window.close();
+         window.location.href = "/";
       }
    }, [session, status]);
 

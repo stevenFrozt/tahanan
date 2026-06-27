@@ -1,15 +1,13 @@
 "use client";
-import { useSearchParams } from "next/dist/client/components/navigation";
+import { GalleryVerticalEnd } from "lucide-react";
+import Image from "next/image";
 import { useActionState } from "react";
 import { toast } from "sonner";
 import { authenticate } from "./actions/authenticate";
-import GoogleLoginButton from "./components/GoogleLoginButton";
+import { LoginForm } from "./components/login-form";
 import { usePopupAuthListener } from "./hooks/usePopupAuthListener";
 
-export default function Login() {
-   const searchParams = useSearchParams();
-   const callbackUrl = searchParams.get("callbackUrl") ?? "";
-
+export default function LoginPage() {
    const [errorMessage, formAction, isPending] = useActionState(
       authenticate,
       undefined,
@@ -20,59 +18,30 @@ export default function Login() {
    if (errorMessage) toast.error(errorMessage);
 
    return (
-      <>
-         <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-            <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-               <h1 className="text-2xl font-bold text-center mb-6">
-                  Welcome Back
-               </h1>
-
-               <p className="text-sm text-gray-500 text-center mb-6">
-                  Sign in to your account
-               </p>
-
-               <form action={formAction} className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-1">
-                     <label className="text-sm font-medium">Email</label>
-                     <input
-                        name="email"
-                        placeholder="you@example.com"
-                        className="rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-green-500"
-                        required
-                     />
+      <div className="grid min-h-svh lg:grid-cols-2">
+         <div className="flex flex-col gap-4 p-6 md:p-10">
+            <div className="flex justify-center gap-2 md:justify-start">
+               <a href="#" className="flex items-center gap-2 font-medium">
+                  <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                     <GalleryVerticalEnd className="size-4" />
                   </div>
-
-                  <div className="flex flex-col gap-1">
-                     <label className="text-sm font-medium">Password</label>
-                     <input
-                        name="password"
-                        type="password"
-                        placeholder="••••••••"
-                        className="rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-green-500"
-                        required
-                     />
-                  </div>
-
-                  <input type="hidden" name="callbackUrl" value={callbackUrl} />
-
-                  {errorMessage && (
-                     <div className="rounded-lg bg-red-100 text-red-600 text-sm p-2">
-                        {errorMessage}
-                     </div>
-                  )}
-
-                  <button
-                     type="submit"
-                     disabled={isPending}
-                     className="rounded-lg bg-green-600 py-2 text-white font-medium hover:bg-green-700 disabled:opacity-50"
-                  >
-                     {isPending ? "Signing in..." : "Sign In"}
-                  </button>
-                  <GoogleLoginButton />
-               </form>
-               <hr />
+                  Tahanan
+               </a>
+            </div>
+            <div className="flex flex-1 items-center justify-center">
+               <div className="w-full max-w-xs">
+                  <LoginForm action={formAction} />
+               </div>
             </div>
          </div>
-      </>
+         <div className="relative hidden bg-muted lg:block">
+            <Image
+               src="https://images.pexels.com/photos/29561705/pexels-photo-29561705.jpeg"
+               alt="Image"
+               fill
+               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+            />
+         </div>
+      </div>
    );
 }

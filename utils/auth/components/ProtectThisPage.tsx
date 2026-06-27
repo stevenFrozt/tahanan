@@ -1,15 +1,13 @@
-import { auth } from '../auth';
-import UnauthorizedPage from './UnauthorizedPage';
+import { auth } from "../auth";
+import UnauthorizedPage from "./UnauthorizedPage";
 
-const ProtectThisPage = async () => {
-     const session = await auth();
-    
-       if (!session) {
-          return <UnauthorizedPage />;
-       }
-  return (
-    <div>ProtectThisPage</div>
-  )
-}
+const ProtectThisPage = async ({ children }: { children: React.ReactNode }) => {
+   const session = await auth();
 
-export default ProtectThisPage
+   if (!session) {
+      return <UnauthorizedPage />;
+   }
+   return <>{children}</>;
+};
+
+export default ProtectThisPage;
