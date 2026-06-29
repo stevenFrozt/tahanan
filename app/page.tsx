@@ -1,1 +1,1 @@
-export { default } from "@/utils/modules/home/index"
+export { default } from "@/utils/modules/home/index2"

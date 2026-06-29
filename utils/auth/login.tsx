@@ -1,7 +1,7 @@
 "use client";
 import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
-import { useActionState } from "react";
+import { Suspense, useActionState } from "react";
 import { toast } from "sonner";
 import { authenticate } from "./actions/authenticate";
 import { LoginForm } from "./components/login-form";
@@ -30,7 +30,9 @@ export default function LoginPage() {
             </div>
             <div className="flex flex-1 items-center justify-center">
                <div className="w-full max-w-xs">
-                  <LoginForm action={formAction} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                     <LoginForm action={formAction} />
+                  </Suspense>
                </div>
             </div>
          </div>
@@ -39,7 +41,7 @@ export default function LoginPage() {
                src="https://images.pexels.com/photos/29561705/pexels-photo-29561705.jpeg"
                alt="Image"
                fill
-               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.5] dark:grayscale-25"
             />
          </div>
       </div>

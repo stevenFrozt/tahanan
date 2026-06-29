@@ -1,2 +1,2 @@
-   export const SESSION_EXPIRE_TIME = 30 * 1; // 60 seconds 
+   export const SESSION_EXPIRE_TIME = 60 * 60; // 60 seconds 
    

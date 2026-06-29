@@ -13,7 +13,7 @@ export default async function Home() {
                <main className="flex flex-col justify-between items-center sm:items-start bg-white dark:bg-black px-16 py-32 w-full max-w-3xl min-h-screen">
                   {session && (
                      <Image
-                        src={session?.user?.image ?? ""}
+                     src={session?.user?.image ?? ""}
                         alt="Next.js logo"
                         width={100}
                         height={20}
