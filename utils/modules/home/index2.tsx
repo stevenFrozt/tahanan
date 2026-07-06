@@ -1,9 +1,9 @@
 import { auth } from "@/utils/auth/auth";
 import ProtectThisPage from "@/utils/auth/components/ProtectThisPage";
+import ItemCard from "@/utils/components/item-card";
 import MobileNav from "@/utils/components/mobile-nav";
 import MobileTopNav from "@/utils/components/mobile-top-nav";
 import SuggestionBar from "@/utils/components/suggestion-bar";
-import Image from "next/image";
 import React from "react";
 
 const data = [
@@ -16,7 +16,7 @@ const data = [
       price: "$100",
       image: "https://images.pexels.com/photos/19069180/pexels-photo-19069180.jpeg",
       author: "John Doe",
-      tags:["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 100,
       timeCreated: "1 min ago",
    },
@@ -29,6 +29,7 @@ const data = [
       price: "$75",
       image: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
       author: "Jane Smith",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 245,
       timeCreated: "1 min ago",
    },
@@ -41,6 +42,7 @@ const data = [
       price: "$250",
       image: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
       author: "Michael Cruz",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 521,
       timeCreated: "1 min ago",
    },
@@ -53,6 +55,7 @@ const data = [
       price: "$45",
       image: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg",
       author: "Sarah Lee",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 189,
       timeCreated: "1 min ago",
    },
@@ -65,6 +68,7 @@ const data = [
       price: "$320",
       image: "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
       author: "Chris Tan",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 342,
       timeCreated: "1 min ago",
    },
@@ -77,6 +81,7 @@ const data = [
       price: "$180",
       image: "https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg",
       author: "Angela Reyes",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 276,
       timeCreated: "1 min ago",
    },
@@ -89,6 +94,7 @@ const data = [
       price: "$450",
       image: "https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg",
       author: "David Santos",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 814,
       timeCreated: "1 min ago",
    },
@@ -101,6 +107,7 @@ const data = [
       price: "$210",
       image: "https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg",
       author: "Maria Garcia",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 198,
       timeCreated: "1 min ago",
    },
@@ -113,6 +120,7 @@ const data = [
       price: "$275",
       image: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg",
       author: "Kevin Lim",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 301,
       timeCreated: "1 min ago",
    },
@@ -125,6 +133,7 @@ const data = [
       price: "$600",
       image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
       author: "Sophia Wilson",
+      tags: ["2 Bedrooms", "1 Bathroom", "2 wheels parking", "Air Conditioned"],
       views: 950,
       timeCreated: "1 min ago",
    },
@@ -144,6 +153,7 @@ const Home = async () => {
                      image={item.image}
                      address={item.address}
                      price={item.price}
+                     tags={item.tags}
                      author={item.author}
                      views={item.views}
                      timeCreated={item.timeCreated}
@@ -171,55 +181,6 @@ function HomeSection({
    );
 }
 
-type itemCardProps = {
-   image: string;
-   author: string;
-   views: number;
-   timeCreated: string;
-   address: string;
-   price: string;
-};
 
-
-// TODO: render tags and add add to favorites button
-
-function ItemCard({
-   image,
-   address,
-   price,
-   author,
-   views,
-   timeCreated,
-}: itemCardProps) {
-   return (
-      <div className="pb-6 mb-6">
-         {/* <Image /> */}
-         <div className="bg-gray-200 aspect-video h-60 w-full relative">
-            <Image
-               src={image}
-               fill
-               alt="Image"
-               className="object-cover absolute"
-            />
-         </div>
-         <div className="px-3 py-3 flex gap-3 items-center flex-wrap">
-            {/* <div className="bg-gray-400 size-10 aspect-square rounded-full" /> */}
-            <div className="flex-1">
-               <p className="leading-6 font-semibold">{address}</p>
-               <div className="flex justify-between">
-                  <div>
-                     {/* <p className="text-xs">{author}</p> */}
-                     <p className="text-xs">
-                        {author} • {views} views • {timeCreated}
-                     </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-            <p className="font-bold text-2xl text-primary px-3">{price}</p>
-
-      </div>
-   );
-}
 
 export default Home;

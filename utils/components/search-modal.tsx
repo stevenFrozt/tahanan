@@ -1,13 +1,11 @@
 "use client";
-
 import { ArrowLeft, Clock3, Search, X } from "lucide-react";
-
 import { Button } from "@/shadcn/components/button";
 import { Dialog, DialogContent, DialogTitle } from "@/shadcn/components/dialog";
 import {
-    InputGroup,
-    InputGroupAddon,
-    InputGroupInput
+   InputGroup,
+   InputGroupAddon,
+   InputGroupInput,
 } from "@/shadcn/components/input-group";
 import { useState } from "react";
 
@@ -32,16 +30,17 @@ type Props = {
    setOpen: (open: boolean) => void;
 };
 
-export default function SearchModal({ open, setOpen }: Props) {
+const SearchModal = ({ open, setOpen }: Props) => {
    const [search, setSearch] = useState("");
+
    return (
       <>
          <Dialog open={open} onOpenChange={setOpen}>
-            {/* <DialogTitle hidden>Search</DialogTitle> */}
             <DialogContent
                showCloseButton={false}
                className="h-dvh max-w-full rounded-none border-0 p-0 sm:max-w-full"
             >
+               <DialogTitle className="sr-only">Search</DialogTitle>
                <div>
                   <div className="flex gap-2 px-2 py-4 mt-4 ">
                      <Button
@@ -66,7 +65,10 @@ export default function SearchModal({ open, setOpen }: Props) {
                            />
                            {search && (
                               <InputGroupAddon align="inline-end">
-                                 <X className="size-5" onClick={() => setSearch("")} />
+                                 <X
+                                    className="size-5"
+                                    onClick={() => setSearch("")}
+                                 />
                               </InputGroupAddon>
                            )}
                         </InputGroup>
@@ -115,4 +117,6 @@ export default function SearchModal({ open, setOpen }: Props) {
          </Dialog>
       </>
    );
-}
+};
+
+export default SearchModal;

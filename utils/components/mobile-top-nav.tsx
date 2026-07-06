@@ -17,10 +17,15 @@ const MobileTopNav = () => {
             </a>
          </div>
          <div className="flex gap-4 items-center">
-            <Bell />
+            <div className="relative inline-block">
+               <Bell />
+               <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 flex min-w-5 h-5 items-center justify-center rounded-full bg-red-500 px-1 text-xs text-white">
+                  9
+               </span>
+            </div>
             <Search onClick={() => setOpen(true)} />
          </div>
-         <SearchModal  open={open} setOpen={setOpen}/>
+         <SearchModal open={open} setOpen={setOpen} />
       </div>
    );
 };

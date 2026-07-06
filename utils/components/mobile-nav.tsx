@@ -30,7 +30,7 @@ export default function MobileNav({ session }: { session: Session | null }) {
    ];
 
    return (
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70 md:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden">
          <div className="mx-auto flex h-16 max-w-md items-center justify-around px-4 pb-safe">
             {navItems.map((item) => {
                const Icon = item.icon;

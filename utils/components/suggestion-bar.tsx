@@ -2,8 +2,8 @@
 
 import { Button } from "@/shadcn/components/button";
 import { cn } from "@/shadcn/lib/utils";
-import { Menu } from "lucide-react";
 import { useState } from "react";
+import LeftMenuPanel from "./left-menu-panel";
 
 const categories = [
    "All",
@@ -25,16 +25,7 @@ export default function SuggestionBar() {
 
    return (
       <div className="no-scrollbar px-4 flex gap-2 overflow-x-auto py-2">
-         <Button
-            size="sm"
-            // onClick={() => setActive(category)}
-            className={cn(
-               "shrink-0 rounded-lg px-4 mr-2",
-               "bg-muted hover:bg-muted/80",
-            )}
-         >
-            <Menu className="text-card-foreground" />
-         </Button>
+         <LeftMenuPanel />
          {categories.map((category) => (
             <Button
                key={category}
@@ -54,3 +45,5 @@ export default function SuggestionBar() {
       </div>
    );
 }
+
+
