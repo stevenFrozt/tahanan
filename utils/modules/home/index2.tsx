@@ -1,7 +1,5 @@
 import { auth } from "@/utils/auth/auth";
-import ProtectThisPage from "@/utils/auth/components/ProtectThisPage";
 import ItemCard from "@/utils/components/item-card";
-import MobileNav from "@/utils/components/mobile-nav";
 import MobileTopNav from "@/utils/components/mobile-top-nav";
 import SuggestionBar from "@/utils/components/suggestion-bar";
 import React from "react";
@@ -141,14 +139,16 @@ const data = [
 
 const Home = async () => {
    const session = await auth();
+
    return (
-      <ProtectThisPage>
-         <MobileTopNav />
+      <>
+         <MobileTopNav session={session} />
          <SuggestionBar />
-         <main className="py-4">
-            <HomeSection sectionTitle="Recomendations">
+         <main className="py-4 mb-12">
+            <Section sectionTitle="Recomendations">
                {data.map((item) => (
                   <ItemCard
+                     session={session}
                      key={item.id}
                      image={item.image}
                      address={item.address}
@@ -157,16 +157,16 @@ const Home = async () => {
                      author={item.author}
                      views={item.views}
                      timeCreated={item.timeCreated}
+                     title={item.title}
                   />
                ))}
-            </HomeSection>
+            </Section>
          </main>
-         <MobileNav session={session} />
-      </ProtectThisPage>
+      </>
    );
 };
 
-function HomeSection({
+function Section({
    sectionTitle,
    children,
 }: {
@@ -180,7 +180,5 @@ function HomeSection({
       </div>
    );
 }
-
-
 
 export default Home;

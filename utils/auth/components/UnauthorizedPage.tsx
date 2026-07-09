@@ -8,7 +8,7 @@ export default function UnauthorizedPage() {
    const searchParams = useSearchParams();
    const callbackUrl = `${pathname}?${searchParams.toString()}`;
    return (
-      <div className="flex h-screen w-full flex-col items-center justify-center gap-4">
+      <div className="flex h-screen absolute w-full flex-col items-center justify-center gap-4 z-[9999]">
          <h1 className="text-2xl font-bold">Unauthorized Access</h1>
          <p className="text-gray-500">
             You need to be logged in to view this page.

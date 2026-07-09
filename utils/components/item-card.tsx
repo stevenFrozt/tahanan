@@ -1,21 +1,47 @@
 "use client";
+import {
+   Drawer,
+   DrawerContent,
+   DrawerDescription,
+   DrawerHeader,
+   DrawerTitle,
+   DrawerTrigger,
+} from "@/shadcn/components/drawer";
+
+import {
+   Command,
+   CommandGroup,
+   CommandItem,
+   CommandList,
+} from "@/shadcn/components/command";
+
 import { cn } from "@/shadcn/lib/utils";
-import { Heart } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+   Clipboard,
+   EllipsisVertical,
+   Flag,
+   Forward,
+   Heart,
+} from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { Session } from "next-auth";
 
 type itemCardProps = {
    image: string;
+   title: string;
    author: string;
    views: number;
    timeCreated: string;
    address: string;
    price: string;
    tags: string[];
+   session: Session | null;
 };
 
 function ItemCard({
+   session,
    image,
    address,
    price,
@@ -23,6 +49,7 @@ function ItemCard({
    views,
    timeCreated,
    tags,
+   title,
 }: itemCardProps) {
    const [isFavorite, setIsFavorite] = useState(false);
    function onAddToFavorites() {
@@ -30,7 +57,7 @@ function ItemCard({
    }
 
    return (
-      <div className="pb-6 mb-6">
+      <div className="pb-8">
          {/* <Image /> */}
          <div className="w-full relative">
             {/* <CarouselWithPagination /> */}
@@ -42,43 +69,83 @@ function ItemCard({
                alt="Image"
                className="object-cover absolute"
             />
-            {/* <div
-               className=" rounded-full p-2 absolute top-2 right-2 bg-black/5 backdrop-blur-sm"
-               onClick={onAddToFavorites}
-            >
-               <Heart className={cn(" size-7 text-white", isFavorite && "fill-red-400 ")} />
-            </div> */}
-            <motion.div
-               whileTap={{ scale: 0.85 }}
-               onClick={onAddToFavorites}
-               className="absolute top-2 right-2 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/5 backdrop-blur-sm"
-            >
+
+            {session && (
                <motion.div
-                  animate={{
-                     scale: isFavorite ? [1, 1.35, 1] : 1,
-                  }}
-                  transition={{
-                     duration: 0.3,
-                  }}
+                  whileTap={{ scale: 0.85 }}
+                  onClick={onAddToFavorites}
+                  className="absolute top-2 right-2 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-black/5 backdrop-blur-sm"
                >
-                  <Heart
-                     className={cn(
-                        "size-7 transition-colors duration-300",
-                        isFavorite
-                           ? "fill-red-500 text-transparent"
-                           : "text-white",
-                     )}
-                  />
+                  <motion.div
+                     animate={{
+                        scale: isFavorite ? [1, 1.35, 1] : 1,
+                     }}
+                     transition={{
+                        duration: 0.3,
+                     }}
+                  >
+                     <Heart
+                        className={cn(
+                           "size-7 transition-colors duration-300",
+                           isFavorite
+                              ? "fill-red-500 text-transparent"
+                              : "text-white",
+                        )}
+                     />
+                  </motion.div>
                </motion.div>
-            </motion.div>
+            )}
          </div>
          <div className="px-3 py-3 flex gap-3 items-center flex-wrap">
             {/* <div className="bg-gray-400 size-10 aspect-square rounded-full" /> */}
             <div className="flex-1">
-               <p className="leading-6 font-semibold">{address}</p>
+               <div className="flex items-center justify-between">
+                  <div>
+                     <p className="text-sm">{title}</p>
+                     <p className="leading-6 font-semibold">{address}</p>
+                  </div>
+                  <Drawer>
+                     <DrawerTrigger>
+                        <EllipsisVertical className="self-start" />
+                     </DrawerTrigger>
+                     <DrawerContent>
+                        <DrawerHeader className="m-0 p-0 pb-4">
+                           <DrawerTitle className="sr-only">
+                              Post Menu
+                           </DrawerTitle>
+                           <DrawerDescription className="sr-only">
+                              Post Menu Description
+                           </DrawerDescription>
+                        </DrawerHeader>
+                        <Command>
+                           <CommandList>
+                              <CommandGroup
+                              //  heading="Suggestions"
+                              >
+                                 <CommandItem className="py-4 text-md ">
+                                    <Heart />
+                                    Save to Favorites
+                                 </CommandItem>
+                                 <CommandItem className="py-4 text-md">
+                                    <Clipboard />
+                                    Copy Link
+                                 </CommandItem>
+                                 <CommandItem className="py-4 text-md">
+                                    <Forward /> Share
+                                 </CommandItem>
+                                 <CommandItem className="py-4 text-md">
+                                    <Flag />
+                                    Report
+                                 </CommandItem>
+                              </CommandGroup>
+                           </CommandList>
+                        </Command>
+                     </DrawerContent>
+                  </Drawer>
+               </div>
                <div>
                   {/* <p className="text-xs">{author}</p> */}
-                  <div className="text-xs pt-1.5 flex items-center gap-1">
+                  <div className="text-xs pt-4 flex items-center gap-1">
                      <div className="bg-gray-500 size-4 aspect-square rounded-full relative">
                         <Image
                            alt="a"

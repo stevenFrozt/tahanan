@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import SessionProviders from "@/utils/providers/sessionProviders";
 import { ThemeProvider } from "@/utils/providers/themeProvider";
+import MobileLayout from "@/utils/components/mobile-layout";
 
 const geistSans = Geist({
    variable: "--font-geist-sans",
@@ -34,11 +35,11 @@ export default function RootLayout({
             <SessionProviders>
                <ThemeProvider
                   attribute="class"
-                  defaultTheme="system"
-                  enableSystem
+                  defaultTheme="light"
+                  enableSystem={false}
                   disableTransitionOnChange
                >
-                  {children}
+                  <MobileLayout>{children}</MobileLayout>
                </ThemeProvider>
             </SessionProviders>
          </body>
