@@ -14,6 +14,7 @@ export default function MobileNav({ session }: { session: Session | null }) {
       "/register",
       "/forgot-password",
       "/reset-password",
+      "/post",
    ];
 
    const navItems = [
@@ -60,7 +61,10 @@ export default function MobileNav({ session }: { session: Session | null }) {
    ];
 
    const path = usePathname();
-   if (hidefromPage.includes(path) || !session) return null;
+   const shouldHide =
+      hidefromPage.includes(path) ||
+      hidefromPage.some((route) => path.startsWith(route));
+   if (shouldHide || !session) return null;
 
    return (
       <nav className="fixed inset-x-0 bottom-0 z-50 border-t bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/80 md:hidden">

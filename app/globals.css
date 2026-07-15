@@ -182,3 +182,8 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Lightbox */
+.yarl__slide {
+  padding: 0 !important;
+}

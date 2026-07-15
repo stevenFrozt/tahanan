@@ -35,7 +35,7 @@ const SearchModal = ({ open, setOpen }: Props) => {
 
    return (
       <>
-         <Dialog open={open} onOpenChange={setOpen}>
+         <Dialog open={open} onOpenChange={setOpen} >
             <DialogContent
                showCloseButton={false}
                className="h-dvh max-w-full rounded-none border-0 p-0 sm:max-w-full"

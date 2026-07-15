@@ -4,7 +4,7 @@ import MobileTopNav from "@/utils/components/mobile-top-nav";
 import SuggestionBar from "@/utils/components/suggestion-bar";
 import React from "react";
 
-const data = [
+export const data = [
    {
       id: 1,
       title: "Modern Apartment in Makati",
@@ -148,6 +148,7 @@ const Home = async () => {
             <Section sectionTitle="Recomendations">
                {data.map((item) => (
                   <ItemCard
+                     id={item.id}
                      session={session}
                      key={item.id}
                      image={item.image}

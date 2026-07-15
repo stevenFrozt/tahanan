@@ -7,7 +7,7 @@ import {
    CarouselItem,
 } from "@/shadcn/components/carousel";
 import { cn } from "@/shadcn/lib/utils";
-import Image from "next/image";
+import { useQueryState } from "nuqs";
 import * as React from "react";
 
 const images = [
@@ -43,12 +43,20 @@ export default function CarouselWithPagination() {
 
    const count = api?.scrollSnapList().length ?? images.length;
 
+   const [OpenImage, setOpenImage] = useQueryState("viewImage");
+
    return (
       <div className="relative w-full overflow-hidden">
          <Carousel setApi={setApi}>
-            <CarouselContent >
+            <CarouselContent>
                {images.map((image, index) => (
-                  <CarouselItem key={index} className="w-full h-60">
+                  <CarouselItem
+                     key={index}
+                     className="basis-full"
+                     onClick={() => {
+                        setOpenImage(String(index));
+                     }}
+                  >
                      <img
                         src={image}
                         alt={`Slide ${index + 1}`}

@@ -27,8 +27,10 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 
 type itemCardProps = {
+   id: number;
    image: string;
    title: string;
    author: string;
@@ -41,6 +43,7 @@ type itemCardProps = {
 };
 
 function ItemCard({
+   id,
    session,
    image,
    address,
@@ -52,22 +55,23 @@ function ItemCard({
    title,
 }: itemCardProps) {
    const [isFavorite, setIsFavorite] = useState(false);
+   const router = useRouter();
    function onAddToFavorites() {
       setIsFavorite(!isFavorite);
    }
 
+function ViewItem() {
+      router.push(`/post/${id}`);
+   }
    return (
       <div className="pb-8">
-         {/* <Image /> */}
-         <div className="w-full relative">
-            {/* <CarouselWithPagination /> */}
-         </div>
          <div className="relative w-full h-60">
             <Image
                src={image}
                fill
                alt="Image"
                className="object-cover absolute"
+               onClick={() => ViewItem()}
             />
 
             {session && (
@@ -100,7 +104,7 @@ function ItemCard({
             {/* <div className="bg-gray-400 size-10 aspect-square rounded-full" /> */}
             <div className="flex-1">
                <div className="flex items-center justify-between">
-                  <div>
+                  <div onClick={() => ViewItem()}>
                      <p className="text-sm">{title}</p>
                      <p className="leading-6 font-semibold">{address}</p>
                   </div>
@@ -169,7 +173,10 @@ function ItemCard({
                </span>
             ))}
          </div>
-         <p className="font-bold text-2xl mt-4 text-primary px-3">
+         <p
+            className="font-bold text-2xl mt-4 text-primary px-3"
+            onClick={() => ViewItem()}
+         >
             {price}
             <span className="text-sm">/ month</span>
          </p>
