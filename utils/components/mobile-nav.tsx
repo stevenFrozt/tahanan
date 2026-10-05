@@ -42,7 +42,7 @@ export default function MobileNav({ session }: { session: Session | null }) {
       //    className: "size-11 text-muted-foreground stroke-1",
       // },
       {
-         href: "/records",
+         href: "/rentals",
          type: "link",
          label: "Rentals",
          icon: Folder,

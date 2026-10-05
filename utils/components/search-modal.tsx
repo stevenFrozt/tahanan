@@ -9,33 +9,44 @@ import {
 } from "@/shadcn/components/input-group";
 import { useState } from "react";
 
-const recentSearches = [
-   "Apartment near UP Diliman",
-   "Boarding house",
-   "Studio apartment",
-   "Pet friendly",
-   "Condo",
-];
+// const recentSearches = [
+//    "Apartment near UP Diliman",
+//    "Boarding house",
+//    "Studio apartment",
+//    "Pet friendly",
+//    "Condo",
+// ];
 
-const suggestions = [
-   "₱5k - ₱10k",
-   "Near School",
-   "With Parking",
-   "Furnished",
-   "Air Conditioned",
-];
+// const suggestions = [
+//    "₱5k - ₱10k",
+//    "Near School",
+//    "With Parking",
+//    "Furnished",
+//    "Air Conditioned",
+// ];
 
 type Props = {
    open: boolean;
    setOpen: (open: boolean) => void;
+   suggestions?: string[];
+   recentSearches?: string[];
+   enableFiltersSuggestions?: boolean;
+   placeholder?: string;
 };
 
-const SearchModal = ({ open, setOpen }: Props) => {
+const SearchModal = ({
+   open,
+   setOpen,
+   suggestions,
+   recentSearches,
+   enableFiltersSuggestions,
+   placeholder,
+}: Props) => {
    const [search, setSearch] = useState("");
 
    return (
       <>
-         <Dialog open={open} onOpenChange={setOpen} >
+         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent
                showCloseButton={false}
                className="h-dvh max-w-full rounded-none border-0 p-0 sm:max-w-full"
@@ -58,7 +69,7 @@ const SearchModal = ({ open, setOpen }: Props) => {
                            </InputGroupAddon>
                            <InputGroupInput
                               autoFocus
-                              placeholder="Search Tahanan"
+                              placeholder={placeholder || "Search Tahanan"}
                               value={search}
                               onChange={(e) => setSearch(e.target.value)}
                               className="text-lg"
@@ -82,7 +93,7 @@ const SearchModal = ({ open, setOpen }: Props) => {
                         </h2> */}
 
                         <div className="space-y-2">
-                           {recentSearches.map((item) => (
+                           {recentSearches?.map((item) => (
                               <button
                                  key={item}
                                  className="flex text-lg w-full items-center gap-3 rounded-lg px-2 py-3 text-left hover:bg-muted"
@@ -94,23 +105,25 @@ const SearchModal = ({ open, setOpen }: Props) => {
                         </div>
                      </section>
 
-                     <section>
-                        <h2 className="mb-3 text-sm font-semibold">
-                           Suggested Filters
-                        </h2>
+                     {enableFiltersSuggestions && (
+                        <section>
+                           <h2 className="mb-3 text-sm font-semibold">
+                              Suggested Filters
+                           </h2>
 
-                        <div className="flex flex-wrap gap-2">
-                           {suggestions.map((item) => (
-                              <Button
-                                 key={item}
-                                 variant="secondary"
-                                 className="rounded-full"
-                              >
-                                 {item}
-                              </Button>
-                           ))}
-                        </div>
-                     </section>
+                           <div className="flex flex-wrap gap-2">
+                              {suggestions?.map((item) => (
+                                 <Button
+                                    key={item}
+                                    variant="secondary"
+                                    className="rounded-full"
+                                 >
+                                    {item}
+                                 </Button>
+                              ))}
+                           </div>
+                        </section>
+                     )}
                   </div>
                </div>
             </DialogContent>

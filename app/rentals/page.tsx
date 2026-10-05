@@ -1,0 +1,1 @@
+export { default } from "@/utils/modules/rentals/index"

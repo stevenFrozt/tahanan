@@ -9,12 +9,12 @@ import {
    ItemTitle,
 } from "@/shadcn/components/item";
 import { Marker, MarkerContent } from "@/shadcn/components/marker";
-import ItemCard from "@/utils/components/item-card";
+import ItemCardSimilar from "@/utils/components/item-card-similar";
 import ReadMoreDetails from "@/utils/components/read-more-details";
 import { BedDouble, Eye, PawPrint, Users } from "lucide-react";
+import { Session } from "next-auth";
 import Image from "next/image";
 import { data } from "../../home/index2";
-import { Session } from "next-auth";
 
 const PostDetails = ({ session }: { session: Session | null }) => {
    const sample = {
@@ -269,10 +269,10 @@ const PostDetails = ({ session }: { session: Session | null }) => {
             <Marker variant="separator" className="mb-10">
                <MarkerContent>You May Also Like</MarkerContent>
             </Marker>
-
-            <div className="grid grid-cols-2 gap-4">
+            {/* TODO: new itemcard for two columns */}
+            <div className="grid grid-cols-2 gap-3 p-2">
                {data.map((item) => (
-                  <ItemCard
+                  <ItemCardSimilar
                      key={item.id}
                      id={item.id}
                      session={session}
