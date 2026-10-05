@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/shadcn/lib/utils";
-import { Folder, Heart, Home, LucideProps } from "lucide-react";
+import { Folder, Heart, Home, LucideProps , Search} from "lucide-react";
 import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +30,14 @@ export default function MobileNav({ session }: { session: Session | null }) {
          href: "/",
          type: "link",
          label: "Explore",
+         icon: Search,
+         className: "",
+         hidden: false,
+      },
+      {
+         href: "/home",
+         type: "link",
+         label: "Home",
          icon: Home,
          className: "",
          hidden: false,
