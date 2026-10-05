@@ -2,6 +2,7 @@ import { auth } from "@/utils/auth/auth";
 import ProtectThisPage from "@/utils/auth/components/ProtectThisPage";
 import { MoveLeft } from "lucide-react";
 import TenantsTable from "./tenants-table";
+import BackButton from "../components/back-button";
 
 const Rentals = async () => {
    const session = await auth();
@@ -59,10 +60,7 @@ const Rentals = async () => {
       <ProtectThisPage>
          {/* <MobileTopNav session={session} /> */}
          <div className="px-4 h-auto">
-            <div className="flex items-center gap-2">
-               <MoveLeft className="size-8 stroke-2 " />
-               Menu
-            </div>
+            <BackButton />
             <main>
                {/* TABLE */}
                {/* <DataTable columns={columns} data={data} /> */}

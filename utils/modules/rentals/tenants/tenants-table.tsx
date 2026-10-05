@@ -231,6 +231,16 @@ const NewTable = () => {
                            </TableCell>
                         </TableRow>
                      ))}
+                     {/* RENDER EMPTY ROWS */}
+                     {items2.length < 10 &&
+                        [...Array(10 - items2.length)].map((_, index) => (
+                           <TableRow
+                              key={`empty-row-${index}`}
+                              className="h-14 border-0 hover:bg-transparent"
+                           >
+                              <TableCell colSpan={11} />
+                           </TableRow>
+                        ))}
                   </TableBody>
                </Table>
             </div>
